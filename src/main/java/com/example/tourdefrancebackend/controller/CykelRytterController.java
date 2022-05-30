@@ -15,9 +15,9 @@ import java.util.Optional;
 @CrossOrigin
 
 public class CykelRytterController {
+
     @Autowired
     CykelRytterRepository cykelRytterRepository;
-
 
     // Henter liste af alle cykelrytter
     @GetMapping("/cykelrytter")
@@ -28,7 +28,7 @@ public class CykelRytterController {
     // Opretter cykelrytter
     @PostMapping("/opret/cykelrytter")
     @ResponseStatus(HttpStatus.CREATED)
-    public CykelRytter postCykelRytter(@RequestBody CykelRytter cykelRytter) {
+    public CykelRytter opretCykelRytter(@RequestBody CykelRytter cykelRytter) {
         return cykelRytterRepository.save(cykelRytter);
     }
 
@@ -57,7 +57,8 @@ public class CykelRytterController {
             return new ResponseEntity<>(ikkeFundet, HttpStatus.NOT_FOUND);
         }
     }
-    // HVAD HAR JEG GJORT FORKERT??
+
+
     @GetMapping("/cykelrytter/cykelhold/{id}")
     public List<CykelRytter> hentCykelRytterFraHold(@PathVariable int holdId) {
         List<CykelRytter> objj = cykelRytterRepository.findAll();

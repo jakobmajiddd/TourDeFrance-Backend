@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class Cykelhold {
+public class CykelholdController {
 
     @Autowired
     CykelholdRepository cykelholdRepository;

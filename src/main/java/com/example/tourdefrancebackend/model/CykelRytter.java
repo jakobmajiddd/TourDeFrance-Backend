@@ -30,7 +30,7 @@ public class CykelRytter {
     @Column(nullable = false)
     private int spurtPoint;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cykelhold_id")
     private Cykelhold cykelhold;
 
