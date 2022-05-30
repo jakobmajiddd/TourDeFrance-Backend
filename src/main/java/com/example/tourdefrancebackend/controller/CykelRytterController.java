@@ -3,9 +3,8 @@ package com.example.tourdefrancebackend.controller;
 import com.example.tourdefrancebackend.model.CykelRytter;
 import com.example.tourdefrancebackend.repository.CykelRytterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +16,7 @@ public class CykelRytterController {
     @Autowired
     CykelRytterRepository cykelRytterRepository;
 
+
     // Henter liste af alle cykelrytter
     @GetMapping("/cykelrytter")
     public List<CykelRytter> hentCykelRytter() {
@@ -24,6 +24,11 @@ public class CykelRytterController {
     }
 
     // Opretter cykelrytter
+    @PostMapping("/opret/cykelrytter")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CykelRytter postCykelRytter(@RequestBody CykelRytter cykelRytter) {
+        return cykelRytterRepository.save(cykelRytter);
+    }
 
 
 }

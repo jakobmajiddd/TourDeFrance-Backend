@@ -11,7 +11,6 @@ public class Cykelhold {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cykelhold_id")
     private int cykelholdId;
 
     @Column(nullable = false)
@@ -23,7 +22,7 @@ public class Cykelhold {
     //Antal cykkelrytter?
 
     @OneToMany
-    @JoinColumn(name = "cykelrytter_id")
+    @JoinColumn(name = "cykelhold_id")
     @JsonBackReference
     private Set<CykelRytter> cykelRytterSet = new HashSet<>();
 

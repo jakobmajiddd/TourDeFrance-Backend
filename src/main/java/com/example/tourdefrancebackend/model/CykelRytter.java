@@ -7,7 +7,6 @@ public class CykelRytter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rytter_id")
     private int rytterId;
 
     @Column(nullable = false)
