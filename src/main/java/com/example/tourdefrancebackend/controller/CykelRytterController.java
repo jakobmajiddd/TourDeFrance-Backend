@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,18 @@ public class CykelRytterController {
             return new ResponseEntity<>(ikkeFundet, HttpStatus.NOT_FOUND);
         }
     }
-
-
+    // HVAD HAR JEG GJORT FORKERT??
+    @GetMapping("/cykelrytter/cykelhold/{id}")
+    public List<CykelRytter> hentCykelRytterFraHold(@PathVariable int holdId) {
+        List<CykelRytter> objj = cykelRytterRepository.findAll();
+        List<CykelRytter> resultat = new ArrayList<>();
+        if (!objj.isEmpty()) {
+            for (CykelRytter cr : objj) {
+                if (cr.getCykelhold().getCykelholdId() == holdId) {
+                    resultat.add(cr);
+                }
+            }
+        }
+        return resultat;
+    }
 }
