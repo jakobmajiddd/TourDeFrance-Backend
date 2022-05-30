@@ -7,12 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin
+@CrossOrigin()
 
 public class CykelRytterController {
 
@@ -33,7 +33,7 @@ public class CykelRytterController {
     }
 
     // Sletter cykelrytter
-    @DeleteMapping("/slette/cykelrytter{id}")
+    @DeleteMapping("/cykelrytter/{id}")
     public ResponseEntity<String> sletteCykelRytter(@PathVariable int id) {
         try {
             cykelRytterRepository.deleteById(id);
@@ -59,17 +59,10 @@ public class CykelRytterController {
     }
 
 
-    @GetMapping("/cykelrytter/cykelhold/{id}")
-    public List<CykelRytter> hentCykelRytterFraHold(@PathVariable int holdId) {
-        List<CykelRytter> objj = cykelRytterRepository.findAll();
-        List<CykelRytter> resultat = new ArrayList<>();
-        if (!objj.isEmpty()) {
-            for (CykelRytter cr : objj) {
-                if (cr.getCykelhold().getCykelholdId() == holdId) {
-                    resultat.add(cr);
-                }
-            }
-        }
-        return resultat;
+    @GetMapping("/cykelrytter/{holdId}")
+    public ResponseEntity<List<CykelRytter>> hentAlleCykelrytterFraHold(@PathVariable int holdId) {
+        List<CykelRytter> filtreHold = cykelRytterRepository.findAll().stream().filter(cykelRytter -> cykelRytter.getCykelhold().getCykelholdId() == holdId).collect(Collectors.toList());
+    return ResponseEntity.status(HttpStatus.OK).body(filtreHold);
     }
 }
+

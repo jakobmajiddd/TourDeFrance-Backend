@@ -2,12 +2,12 @@ package com.example.tourdefrancebackend.controller;
 
 
 import com.example.tourdefrancebackend.model.CykelRytter;
+import com.example.tourdefrancebackend.model.Cykelhold;
 import com.example.tourdefrancebackend.repository.CykelRytterRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
@@ -15,10 +15,6 @@ import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -37,10 +33,7 @@ class CykelRytterControllerTest {
         cykelRytterRepository.deleteAll();
     }
 
-    @Test
-    void hentCykelRytter() {
-    }
-
+    // Test til at oprette cykelrytter
     @Test
     void opretCykelRytter() {
         /*
@@ -53,10 +46,13 @@ class CykelRytterControllerTest {
         "bjergPoint": 12,
         "spurtPoint": 34,
         "cykelhold": null
+         "cykelholdId": 1,
+            "holdNavn": "JensJens",
+            "land": "Afrika"
          */
         CykelRytter cykelRytter = new CykelRytter();
 
-        cykelRytter.setRytterId(1);
+        //cykelRytter.setRytterId(1);
         cykelRytter.setRytterNavn("Jakob");
         cykelRytter.setRytterEfternavn("Hansen");
         cykelRytter.setRytterAlder(22);
@@ -64,22 +60,47 @@ class CykelRytterControllerTest {
         cykelRytter.setRytterTid(33);
         cykelRytter.setBjergPoint(56);
         cykelRytter.setSpurtPoint(32);
-        cykelRytter.setCykelhold(null);
+
+        Cykelhold cykelhold = new Cykelhold();
+        cykelhold.setHoldNavn("JEns");
+        cykelhold.setLand("Norge");
+        cykelRytter.setCykelhold(cykelhold);
+
 
         cykelRytterController.opretCykelRytter(cykelRytter);
 
-        Optional<CykelRytter> optionalCykelRytter = cykelRytterRepository.findById(1);
+        Optional<CykelRytter> optionalCykelRytter = cykelRytterRepository.findById(cykelRytter.getRytterId());
+
         assertThat(optionalCykelRytter.isPresent()).isTrue();
+        assertEquals("Jakob", optionalCykelRytter.get().getRytterNavn());
     }
 
     @Test
     void sletteCykelRytter() {
     }
 
-    @Test
-    void updateCykelRytter() {
-    }
+    /*
+        @Test
+        void updateCykelRytter() {
+            CykelRytter cykelRytter = new CykelRytter();
+            cykelRytter.setRytterId(2);
+            cykelRytter.setRytterNavn("Jonas");
+            cykelRytter.setRytterEfternavn("Tohmsen");
+            cykelRytter.setRytterAlder(23);
+            cykelRytter.setRytterLand("Sverige");
+            cykelRytter.setRytterTid(21);
+            cykelRytter.setSpurtPoint(32);
+            cykelRytter.setBjergPoint(32);
+            cykelRytter.setCykelhold(null);
 
+            cykelRytterController.updateCykelRytter(2, new CykelRytter());
+
+            Optional<CykelRytter> optionalCykelRytter = cykelRytterRepository.findById(2);
+            assertThat("")
+        }
+
+
+     */
     @Test
     void hentCykelRytterFraHold() {
     }

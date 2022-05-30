@@ -16,13 +16,13 @@ public class CykelRytter {
     private String rytterEfternavn;
 
     @Column(nullable = false)
-    private int rytterAlder; //Måske bruge LocalDate?
+    private int rytterAlder;
 
     @Column(nullable = false)
     private String rytterLand;
 
     @Column(nullable = false)
-    private double rytterTid; //Måske bruge LocalTime? Få det hele ud som min(int) og formatere det i JS
+    private double rytterTid;
 
     @Column(nullable = false)
     private int bjergPoint;
