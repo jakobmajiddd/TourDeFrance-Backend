@@ -14,7 +14,6 @@ import java.util.Optional;
 @CrossOrigin
 
 public class CykelRytterController {
-    //TODO OPRETTE, SLETTE, RETTE
     @Autowired
     CykelRytterRepository cykelRytterRepository;
 
