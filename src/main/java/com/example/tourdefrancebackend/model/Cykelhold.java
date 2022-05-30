@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.tourdefrancebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -11,6 +11,7 @@ public class Cykelhold {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cykelhold_id")
     private int cykelholdId;
 
     @Column(nullable = false)
@@ -22,7 +23,7 @@ public class Cykelhold {
     //Antal cykkelrytter?
 
     @OneToMany
-    @JoinColumn(name = "cykelrytterId")
+    @JoinColumn(name = "cykelrytter_id")
     @JsonBackReference
     private Set<CykelRytter> cykelRytterSet = new HashSet<>();
 

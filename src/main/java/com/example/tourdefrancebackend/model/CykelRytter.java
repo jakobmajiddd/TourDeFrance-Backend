@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.tourdefrancebackend.model;
 
 import javax.persistence.*;
 
@@ -7,6 +7,7 @@ public class CykelRytter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rytter_id")
     private int rytterId;
 
     @Column(nullable = false)
@@ -31,7 +32,7 @@ public class CykelRytter {
     private int spurtPoint;
 
     @ManyToOne
-    @JoinColumn(name = "cykelholdId")
+    @JoinColumn(name = "cykelhold_id")
     private Cykelhold cykelhold;
 
     //Getters og Setters
