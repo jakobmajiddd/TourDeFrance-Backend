@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-@TestPropertySource(locations = "application-test.properties")
+@TestPropertySource(locations = "classpath:application-test.properties")
 class CykelRytterControllerTest {
 
     @Autowired
@@ -36,23 +36,9 @@ class CykelRytterControllerTest {
     // Test til at oprette cykelrytter
     @Test
     void opretCykelRytter() {
-        /*
-         "rytterId": 1,
-        "rytterNavn": "Erik",
-        "rytterEfternavn": "Janus",
-        "rytterAlder": 232,
-        "rytterLand": "Danmark",
-        "rytterTid": 267.0,
-        "bjergPoint": 12,
-        "spurtPoint": 34,
-        "cykelhold": null
-         "cykelholdId": 1,
-            "holdNavn": "JensJens",
-            "land": "Afrika"
-         */
+
         CykelRytter cykelRytter = new CykelRytter();
 
-        //cykelRytter.setRytterId(1);
         cykelRytter.setRytterNavn("Jakob");
         cykelRytter.setRytterEfternavn("Hansen");
         cykelRytter.setRytterAlder(22);

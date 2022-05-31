@@ -19,7 +19,6 @@ public class Cykelhold {
     @Column(nullable = false)
     private String land;
 
-    //Antal cykkelrytter?
 
     @OneToMany
     @JoinColumn(name = "cykelhold_id")

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,10 +60,13 @@ public class CykelRytterController {
     }
 
 
-    @GetMapping("/cykelrytter/{holdId}")
-    public ResponseEntity<List<CykelRytter>> hentAlleCykelrytterFraHold(@PathVariable int holdId) {
-        List<CykelRytter> filtreHold = cykelRytterRepository.findAll().stream().filter(cykelRytter -> cykelRytter.getCykelhold().getCykelholdId() == holdId).collect(Collectors.toList());
-    return ResponseEntity.status(HttpStatus.OK).body(filtreHold);
+    @GetMapping("/cykelrytter/{holdNavn}")
+    public ResponseEntity<List<CykelRytter>> hentAlleCykelrytterFraHold(@PathVariable String holdNavn) {
+        List<CykelRytter> alleCykelrytter = new ArrayList<>();
+        // Tilføjer alle cykelrytter til 'alleCykelrytter'
+        cykelRytterRepository.findAll().forEach(alleCykelrytter::add);
+        // Stream læser alleCykelrytter igennem hvor den filtre med lambda med parameteren og expression
+        List<CykelRytter> filtreHold = alleCykelrytter.stream().filter(cykelRytter -> cykelRytter.getCykelhold().getHoldNavn().equals(holdNavn)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(filtreHold);
     }
 }
-
